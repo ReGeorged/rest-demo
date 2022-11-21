@@ -15,25 +15,17 @@ public class DataProvider {
 
     @Test(dataProvider = "one")
     public void test2(String userName, String password, String code, String message) {
-        RequestPojo sample = new RequestPojo();
+        RequestPojo testRequest = new RequestPojo();
 
-        sample.setUserName(userName);
-        System.out.println("username: " + userName);
-        sample.setPassword(password);
-        System.out.println("password: " + password);
-        System.out.println("------------");
+        testRequest.setUserName(userName);
+        testRequest.setPassword(password);
 
-        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(sample)).asString();
+        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(testRequest)).asString();
         String responseCode = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getCode();
         String responseMessage = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getMessage();
 
-        Assert.assertEquals(responseCode,code);
-        Assert.assertEquals(responseMessage,message);
-
-
-        System.out.println(responseCode);
-
-
+        Assert.assertEquals(responseCode,code,"Response Codes dont match");
+        Assert.assertEquals(responseMessage,message,"Response Messages dont match");
     }
 
 
