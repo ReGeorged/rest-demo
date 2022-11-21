@@ -1,3 +1,5 @@
 {
-  "usersEndPoint":"https://bookstore.toolsqa.com/Account/v1/User"
+  "usersEndPoint":"https://bookstore.toolsqa.com/Account/v1/User",
+  "authorizedEndPoint": "https://bookstore.toolsqa.com/Account/v1/Authorized",
+  "generateToken": "https://bookstore.toolsqa.com/Account/v1/GenerateToken"
 }

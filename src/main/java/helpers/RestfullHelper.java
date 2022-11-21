@@ -23,4 +23,11 @@ public class RestfullHelper {
     public static Response postToUser(String userJsonBody) {
         return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.API_ENDPOINT);
     }
+
+    public static Response postToAuthorized(String userJsonBody) {
+        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.AUTHORIZED_ENDPOINT);
+    }
+    public static Response postToGenerateToken(String userJsonBody) {
+        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.GENERATE_TOKEN_ENDPOINT);
+    }
 }
