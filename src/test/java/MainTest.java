@@ -8,7 +8,6 @@ import pojos.RequestPojo;
 import pojos.ResponsePojo;
 import pojos.TokenPojo;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
 public class MainTest {
@@ -30,18 +29,14 @@ public class MainTest {
 
     @Test
     public void test2() {
-
         RequestPojo testRequest = new RequestPojo();
 
         testRequest.setUserName("V2e2r221323323c3oolUser231231");
         testRequest.setPassword("ThisIsVery123Strong/#/");
 
         String pojoToString = PojoHelper.pojoToJson(testRequest);
-
         String response = RestfullHelper.postToUser(pojoToString).asString();
 
-
-        String responseUserId = PojoHelper.jsonToPojoHelper(response, NewUserPojo.class).getUserID();
         String responseUsername = PojoHelper.jsonToPojoHelper(response, NewUserPojo.class).getUsername();
         List responseBooksList = PojoHelper.jsonToPojoHelper(response, NewUserPojo.class).getBooks();
         boolean isEmpty = responseBooksList.isEmpty();
@@ -50,13 +45,17 @@ public class MainTest {
         Assert.assertTrue(isEmpty, "List is not null!");
 
         Boolean isAuthorized = Boolean.valueOf(RestfullHelper.postToAuthorized(pojoToString).asString());
-        Assert.assertFalse(isAuthorized,"User is Authorized!");
+        Assert.assertFalse(isAuthorized, "User is Authorized!");
 
         String tokenResponse = RestfullHelper.postToGenerateToken(pojoToString).asString();
         TokenPojo tokenPojo = PojoHelper.jsonToPojoHelper(tokenResponse, TokenPojo.class);
-        Assert.assertEquals(tokenPojo.getStatus(),"Success","Statuses dont match!");
-        Assert.assertEquals(tokenPojo.getResult(),"User authorized successfully.","Results do not match!");
+        Assert.assertEquals(tokenPojo.getStatus(), "Success", "Statuses dont match!");
+        Assert.assertEquals(tokenPojo.getResult(), "User authorized successfully.", "Results do not match!");
+
         isAuthorized = Boolean.valueOf(RestfullHelper.postToAuthorized(pojoToString).asString());
-        Assert.assertTrue(isAuthorized,"User is not authorized!");
+        Assert.assertTrue(isAuthorized, "User is not authorized!");
+    }
+    public void test3(){
+
     }
 }
