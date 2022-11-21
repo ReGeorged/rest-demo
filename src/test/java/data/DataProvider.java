@@ -1,91 +1,59 @@
 package data;
 
 import helpers.PojoHelper;
+import helpers.RestfullHelper;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojos.BooksApiPojo;
+import pojos.RequestPojo;
+import pojos.ResponsePojo;
 import utils.FileUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class DataProvider {
 
-    @org.testng.annotations.DataProvider(name = "1")
-    public Object[][] dataSet(){
-        Object[][] dataset = {{"userName1","password1","code1","message1"},
-                {"userName2","password2","code2","message2"},
-                {"userName3","password3","code3","message3"},
-                {"userName4","password4","code4","message4"}};
+    @Test(dataProvider = "one")
+    public void test2(String userName, String password, String code, String message) {
+        RequestPojo sample = new RequestPojo();
 
-        System.out.println(dataset[3][1]);
-
-        return dataset;
-    }
-
-    @Test(dataProvider = "one" )
-    public void testDataProvider(String userName, String password,String code, String message){
-        System.out.println("username: "+userName);
-
-
+        sample.setUserName(userName);
+        System.out.println("username: " + userName);
+        sample.setPassword(password);
+        System.out.println("password: " + password);
         System.out.println("------------");
-        System.out.println("password: "+password);
-        System.out.println("------------");
-        System.out.println("code: "+code);
-        System.out.println("------------");
-        System.out.println("message: "+message);
 
-        System.out.println("\n END OF FIRST DIMENSION");
+        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(sample)).asString();
+        String responseCode = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getCode();
+        String responseMessage = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getMessage();
 
-//        System.out.println(FileUtils.readJsonAsStringFromResources("testData.json","userName"));
+        Assert.assertEquals(responseCode,code);
+        Assert.assertEquals(responseMessage,message);
+
+
+        System.out.println(responseCode);
+
 
     }
 
 
-    @Test
-    public void tryThis(){
+
+
+
+
+
+    @org.testng.annotations.DataProvider(name = "one")
+    public Object[][] getDataParameters() {
         String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");
-        List<BooksApiPojo> list=  PojoHelper.fromJsonToPojoList(jsonString,BooksApiPojo.class);
-        for (int j =0; j<list.size();j++){
-            System.out.println(list.get(j).getResponse().getMessage());
+        List<BooksApiPojo> list = PojoHelper.fromJsonToPojoList(jsonString, BooksApiPojo.class);
+        Object[][] testScenariosArray = new Object[list.size()][4];
+        for (int i = 0; i < list.size(); i++) {
+            testScenariosArray[i][0] = list.get(i).getRequest().getUserName();
+            testScenariosArray[i][1] = list.get(i).getRequest().getPassword();
+            testScenariosArray[i][2] = list.get(i).getResponse().getCode();
+            testScenariosArray[i][3] = list.get(i).getResponse().getMessage();
         }
-    }
-
-
-    @Test
-    public Object[][] jsonArray(){
-        String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");
-        List<BooksApiPojo> list=  PojoHelper.fromJsonToPojoList(jsonString,BooksApiPojo.class);
-        int listSize = list.size();
-        Object[][] array = new Object[listSize][listSize];
-        for(int i=0;i<listSize;i++){
-
-        }
-
-        System.out.println(list.get(0));
-        return array;
-    }
-
-    @org.testng.annotations.DataProvider(name ="one")
-    public Object[][] test(){
-        String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");
-        List<BooksApiPojo> list=  PojoHelper.fromJsonToPojoList(jsonString,BooksApiPojo.class);
-        Object[][] wait = new Object[list.size()][4];
-        int attributeSize = 0;
-        for (int i =0; i<list.size();i++){
-            ArrayList newCase = new ArrayList<>();
-            newCase.add(list.get(i).getRequest().getUserName());
-            newCase.add(list.get(i).getRequest().getPassword());
-            newCase.add(list.get(i).getResponse().getCode());
-            newCase.add(list.get(i).getResponse().getMessage());
-
-            attributeSize =newCase.size();
-            for (int j=0;j<attributeSize;j++){
-                wait[i][j] = newCase.get(j);
-
-            }
-        }
-        return wait;
-
+        return testScenariosArray;
 
     }
 }

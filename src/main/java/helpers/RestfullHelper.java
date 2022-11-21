@@ -9,18 +9,18 @@ import static io.restassured.RestAssured.given;
 
 public class RestfullHelper {
 
-    private static Response postWithHeadersAndBody(Map headersHashMap, String body, String endPoint, int expectedCode) {
+    private static Response postWithHeadersAndBody(Map headersHashMap, String body, String endPoint) {
         Response res = given()
                 .headers(headersHashMap)
                 .body(body)
                 .when()
                 .post(endPoint).
                 then()
-                .assertThat().statusCode(expectedCode).extract().response();
+                .extract().response();
         return res;
     }
 
-    public static Response postToUser(String userJsonBody, int responseCode) {
-        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.API_ENDPOINT, responseCode);
+    public static Response postToUser(String userJsonBody) {
+        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.API_ENDPOINT);
     }
 }

@@ -13,7 +13,7 @@ public class MainTest {
         sample.setUserName("automation");
         sample.setPassword("Automation@!@123");
 
-        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(sample),406).asString();
+        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(sample)).asString();
         String responseCode = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getCode();
         String responseMessage = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getMessage();
 
