@@ -1,4 +1,3 @@
 {
-  "url":"https://bookstore.toolsqa.com/Account/v1/User",
-  "name": "asda"
+  "usersEndPoint":"https://bookstore.toolsqa.com/Account/v1/User"
 }

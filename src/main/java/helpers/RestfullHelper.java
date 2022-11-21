@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 
 public class RestfullHelper {
 
-    private static Response postWithHeadersAndParams(Map headersHashMap, String body, String endPoint, int expectedCode) {
+    private static Response postWithHeadersAndBody(Map headersHashMap, String body, String endPoint, int expectedCode) {
         Response res = given()
                 .headers(headersHashMap)
                 .body(body)
@@ -20,7 +20,7 @@ public class RestfullHelper {
         return res;
     }
 
-    public static Response postToUser(String body) {
-        return postWithHeadersAndParams(BookHashMaps.headersForBooks(), body, EndPoints.API_ENDPOINT, 406);
+    public static Response postToUser(String userJsonBody, int responseCode) {
+        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.API_ENDPOINT, responseCode);
     }
 }

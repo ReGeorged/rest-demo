@@ -16,11 +16,11 @@ public class PojoHelper {
         }
     }
 
-    public static String pojoToJson(Object whichClass) {
+    public static String pojoToJson(Object whichObj) {
         ObjectMapper mapper = new ObjectMapper();
         String json = null;
         try {
-            json = mapper.writeValueAsString(whichClass);
+            json = mapper.writeValueAsString(whichObj);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
