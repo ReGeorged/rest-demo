@@ -1,12 +1,14 @@
-package data;
+package helpers;
 
 import helpers.PojoHelper;
+import io.qameta.allure.Step;
 import pojos.BooksApiPojo;
 import utils.FileUtils;
 
 import java.util.List;
 
 public class DataProvider {
+
     @org.testng.annotations.DataProvider(name = "one")
     public Object[][] getDataParameters() {
         String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");

@@ -1,7 +1,7 @@
 import constants.CustomParameters;
-import data.DataProvider;
 import helpers.PojoHelper;
 import helpers.RestfullHelper;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -12,28 +12,14 @@ import pojos.TokenPojo;
 
 import java.util.List;
 
-public class MainTest {
+public class AuthTest {
 
-
-    @Test(dataProvider = "one", dataProviderClass = DataProvider.class)
-    public void test1(String userName, String password, String code, String message) {
-        RequestPojo testRequest = new RequestPojo();
-
-        testRequest.setUserName(userName);
-        testRequest.setPassword(password);
-
-        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(testRequest)).asString();
-        String responseCode = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getCode();
-        String responseMessage = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getMessage();
-        Assert.assertEquals(responseCode, code, "Response Codes dont match");
-        Assert.assertEquals(responseMessage, message, "Response Messages dont match");
-    }
-
-
-
+    @Description("executing scenario two: checking user creation and validation....")
     @Parameters({"user-name"})
     @Test
     public void test2(@Optional String param) {
+
+        // თუ არ მივაწვდით კონკრეტულ იუზერნეიმს დეფაულტად დაისეტება იუზერნეიმი ჯეისონ ფაილიდან
         String userName = CustomParameters.DEFAULT_USERNAME;
         if (!(param ==null) && !param.equals("${user-name}")) {
             userName = param;
@@ -63,5 +49,4 @@ public class MainTest {
         isAuthorized = Boolean.valueOf(RestfullHelper.postToAuthorized(pojoToString).asString());
         Assert.assertTrue(isAuthorized, "User is not authorized!");
     }
-
 }

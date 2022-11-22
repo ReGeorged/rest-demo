@@ -3,6 +3,10 @@
 <suite name="All Test Suite">
     <parameter name="user-name" value="${user-name}"></parameter>
     <test name="test1">
-        <classes><class name="MainTest"></class></classes>
+        <classes>
+            <class name="UserTest"></class>
+            <class name="AuthTest"></class>
+        </classes>
+
     </test>
 </suite>
