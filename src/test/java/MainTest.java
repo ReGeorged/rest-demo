@@ -3,6 +3,7 @@ import data.DataProvider;
 import helpers.PojoHelper;
 import helpers.RestfullHelper;
 import org.testng.Assert;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pojos.RequestPojo;
@@ -28,19 +29,23 @@ public class MainTest {
         Assert.assertEquals(responseMessage, message, "Response Messages dont match");
     }
 
-    @Parameters({"custom-user-name"})
+
+
+    @Parameters({"user-name"})
     @Test
-    public void test2(String param) {
+    public void test2(@Optional String param) {
+        String userName = CustomParameters.DEFAULT_USERNAME;
+        if (!(param ==null) && !param.equals("${user-name}")) {
+            userName = param;
+        }
         RequestPojo testRequest = new RequestPojo();
-        System.out.println("CUSTOM USERNAME IS "+param);
-        testRequest.setUserName(param);
+        testRequest.setUserName(userName);
         testRequest.setPassword(CustomParameters.PWD);
 
         String pojoToString = PojoHelper.pojoToJson(testRequest);
         String response = RestfullHelper.postToUser(pojoToString).asString();
 
         String responseUsername = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getUsername();
-        System.out.println("username is: " + responseUsername);
         List responseBooksList = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getBooks();
         boolean isEmpty = responseBooksList.isEmpty();
 
