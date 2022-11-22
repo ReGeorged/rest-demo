@@ -23,7 +23,7 @@ public class AuthTest {
 
         // თუ არ მივაწვდით კონკრეტულ იუზერნეიმს დეფაულტად დაისეტება იუზერნეიმი ჯეისონ ფაილიდან
         String userName = CustomParameters.DEFAULT_USERNAME;
-        if (!(param ==null) && !param.equals("${user-name}")) {
+        if (!(param == null) && !param.equals("${user-name}")) {
             userName = param;
         }
         RequestPojo testRequest = new RequestPojo();
@@ -34,16 +34,15 @@ public class AuthTest {
         String response = RestfullHelper.postToUser(pojoToString).asString();
 
         String responseUsername = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getUsername();
-        System.out.println(responseUsername);
 
         List responseBooksList = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getBooks();
 
-        Assert.assertNotNull(responseUsername,"response Username is null");
-        Assert.assertNotNull(responseBooksList,"response Booklist is null");
+        Assert.assertNotNull(responseUsername, "response Username is null");
+        Assert.assertNotNull(responseBooksList, "response Book list is null");
         Assert.assertEquals(responseUsername, testRequest.getUserName(), "UserNames do not match!");
         Assert.assertTrue(responseBooksList.isEmpty(), "List is not null!");
 
-        Boolean isAuthorized = Boolean.valueOf(RestfullHelper.postToAuthorized(pojoToString).asString());
+        boolean isAuthorized = Boolean.parseBoolean(RestfullHelper.postToAuthorized(pojoToString).asString());
         Assert.assertFalse(isAuthorized, "User is Authorized!");
 
         String tokenResponse = RestfullHelper.postToGenerateToken(pojoToString).asString();
@@ -51,7 +50,7 @@ public class AuthTest {
         Assert.assertEquals(tokenPojo.getStatus(), "Success", "Statuses dont match!");
         Assert.assertEquals(tokenPojo.getResult(), "User authorized successfully.", "Results do not match!");
 
-        isAuthorized = Boolean.valueOf(RestfullHelper.postToAuthorized(pojoToString).asString());
+        isAuthorized = Boolean.parseBoolean(RestfullHelper.postToAuthorized(pojoToString).asString());
         Assert.assertTrue(isAuthorized, "User is not authorized!");
     }
 }

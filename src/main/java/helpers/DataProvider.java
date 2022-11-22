@@ -1,7 +1,5 @@
 package helpers;
 
-import helpers.PojoHelper;
-import io.qameta.allure.Step;
 import pojos.BooksApiPojo;
 import utils.FileUtils;
 
@@ -9,8 +7,8 @@ import java.util.List;
 
 public class DataProvider {
 
-    @org.testng.annotations.DataProvider(name = "one")
-    public Object[][] getDataParameters() {
+    @org.testng.annotations.DataProvider(name = "userCasesFromJson")
+    public static Object[][] getUserParamsFromJson() {
         String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");
         List<BooksApiPojo> testDataList = PojoHelper.fromJsonToPojoList(jsonString, BooksApiPojo.class);
         Object[][] testScenariosArray = new Object[testDataList.size()][4];

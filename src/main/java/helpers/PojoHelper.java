@@ -21,7 +21,7 @@ public class PojoHelper {
 
     public static String pojoToJson(Object whichObj) {
         ObjectMapper mapper = new ObjectMapper();
-        String json = null;
+        String json;
         try {
             json = mapper.writeValueAsString(whichObj);
         } catch (JsonProcessingException e) {

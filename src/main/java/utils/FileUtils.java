@@ -21,9 +21,7 @@ public class FileUtils {
         }
 
         try {
-            Map<String, Object> data = mapper.readValue(
-                    fileObj, new TypeReference<Map<String, Object>>() {
-                    });
+            Map<String, Object> data = mapper.readValue(fileObj, new TypeReference<>() {});
             return data.get(key).toString();
         } catch (Exception e) {
             e.printStackTrace();
@@ -32,11 +30,11 @@ public class FileUtils {
     }
 
 
-    public static String convertFileIntoString(String file) {
+    public static String convertFileIntoString(String filePath) {
         String result;
 
         try {
-            result = new String(Files.readAllBytes(Paths.get(file)));
+            result = new String(Files.readAllBytes(Paths.get(filePath)));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
