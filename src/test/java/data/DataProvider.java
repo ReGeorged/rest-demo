@@ -1,6 +1,7 @@
 package data;
 
 import helpers.PojoHelper;
+import lombok.Data;
 import pojos.BooksApiPojo;
 import utils.FileUtils;
 
@@ -20,4 +21,15 @@ public class DataProvider {
         }
         return testScenariosArray;
     }
+//TODO this was a much harder way
+//    @org.testng.annotations.DataProvider(name ="test")
+//    public Object[][] advancedDataProviderTest(){
+//
+//
+//        String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");
+//        List<BooksApiPojo> list = PojoHelper.fromJsonToPojoList(jsonString, BooksApiPojo.class);
+//
+//
+//
+//    }
 }

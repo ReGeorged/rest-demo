@@ -3,7 +3,6 @@ import helpers.PojoHelper;
 import helpers.RestfullHelper;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pojos.NewUserPojo;
 import pojos.RequestPojo;
 import pojos.ResponsePojo;
 import pojos.TokenPojo;
@@ -31,14 +30,15 @@ public class MainTest {
     public void test2() {
         RequestPojo testRequest = new RequestPojo();
 
-        testRequest.setUserName("V2e2r221323323c3oolUser231231");
+        testRequest.setUserName("qqVq2qe2r2213232123323c3oolUser231231");
         testRequest.setPassword("ThisIsVery123Strong/#/");
 
         String pojoToString = PojoHelper.pojoToJson(testRequest);
         String response = RestfullHelper.postToUser(pojoToString).asString();
 
-        String responseUsername = PojoHelper.jsonToPojoHelper(response, NewUserPojo.class).getUsername();
-        List responseBooksList = PojoHelper.jsonToPojoHelper(response, NewUserPojo.class).getBooks();
+        String responseUsername = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getUsername();
+        System.out.println("username is: "+ responseUsername);
+        List responseBooksList = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getBooks();
         boolean isEmpty = responseBooksList.isEmpty();
 
         Assert.assertEquals(responseUsername, testRequest.getUserName(), "UserNames do not match!");
@@ -56,6 +56,8 @@ public class MainTest {
         Assert.assertTrue(isAuthorized, "User is not authorized!");
     }
     public void test3(){
+
+
 
     }
 }
