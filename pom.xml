@@ -40,7 +40,6 @@
             <scope>provided</scope>
         </dependency>
 
-
     </dependencies>
 
     <properties>
@@ -48,6 +47,25 @@
         <maven.compiler.target>18</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-booter</artifactId>
+                    <version>3.0.0-M7</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>
+                                src\test\resources\testng.xml
+                            </suiteXmlFile>
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
 
 
 </project>

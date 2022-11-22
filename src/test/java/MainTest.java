@@ -1,7 +1,9 @@
+import constants.CustomParameters;
 import data.DataProvider;
 import helpers.PojoHelper;
 import helpers.RestfullHelper;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pojos.RequestPojo;
 import pojos.ResponsePojo;
@@ -26,12 +28,13 @@ public class MainTest {
         Assert.assertEquals(responseMessage, message, "Response Messages dont match");
     }
 
+    @Parameters({"custom-user-name"})
     @Test
-    public void test2() {
+    public void test2(String param) {
         RequestPojo testRequest = new RequestPojo();
-
-        testRequest.setUserName("qqVq2qe2r2213232123323c3oolUser231231");
-        testRequest.setPassword("ThisIsVery123Strong/#/");
+        System.out.println("CUSTOM USERNAME IS "+param);
+        testRequest.setUserName(param);
+        testRequest.setPassword(CustomParameters.PWD);
 
         String pojoToString = PojoHelper.pojoToJson(testRequest);
         String response = RestfullHelper.postToUser(pojoToString).asString();
@@ -56,8 +59,4 @@ public class MainTest {
         Assert.assertTrue(isAuthorized, "User is not authorized!");
     }
 
-    public void test3() {
-
-
-    }
 }
