@@ -1,5 +1,6 @@
 package helpers;
 
+import constants.BookHashMaps;
 import constants.EndPoints;
 import io.restassured.response.Response;
 
@@ -27,6 +28,7 @@ public class RestfullHelper {
     public static Response postToAuthorized(String userJsonBody) {
         return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.AUTHORIZED_ENDPOINT);
     }
+
     public static Response postToGenerateToken(String userJsonBody) {
         return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.GENERATE_TOKEN_ENDPOINT);
     }

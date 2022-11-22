@@ -37,7 +37,7 @@ public class MainTest {
         String response = RestfullHelper.postToUser(pojoToString).asString();
 
         String responseUsername = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getUsername();
-        System.out.println("username is: "+ responseUsername);
+        System.out.println("username is: " + responseUsername);
         List responseBooksList = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getBooks();
         boolean isEmpty = responseBooksList.isEmpty();
 
@@ -55,8 +55,8 @@ public class MainTest {
         isAuthorized = Boolean.valueOf(RestfullHelper.postToAuthorized(pojoToString).asString());
         Assert.assertTrue(isAuthorized, "User is not authorized!");
     }
-    public void test3(){
 
+    public void test3() {
 
 
     }

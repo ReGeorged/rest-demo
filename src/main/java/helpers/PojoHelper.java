@@ -1,10 +1,8 @@
 package helpers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
 
 import java.util.List;
 
@@ -31,7 +29,8 @@ public class PojoHelper {
         }
         return json;
     }
-    public static <T> List<T> fromJsonToPojoList(String jsonString, Class<T> whatClass){
+
+    public static <T> List<T> fromJsonToPojoList(String jsonString, Class<T> whatClass) {
         ObjectMapper mapper = new ObjectMapper();
         JavaType type = mapper.getTypeFactory().
                 constructCollectionType(List.class, whatClass);
