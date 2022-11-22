@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ResponsePojo {
+public class Response {
     private String code;
     private String message;
     private String userID;

@@ -3,7 +3,7 @@ package pojos;
 import lombok.Data;
 
 @Data
-public class TokenPojo {
+public class Token {
     private String token;
     private String expires;
     private String status;

@@ -3,7 +3,7 @@ package pojos;
 import lombok.Data;
 
 @Data
-public class RequestPojo {
+public class Request {
     private String userName;
     private String password;
 }

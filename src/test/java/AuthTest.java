@@ -7,9 +7,9 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import pojos.RequestPojo;
-import pojos.ResponsePojo;
-import pojos.TokenPojo;
+import pojos.Request;
+import pojos.Response;
+import pojos.Token;
 
 import java.util.List;
 
@@ -26,16 +26,16 @@ public class AuthTest {
         if (!(param == null) && !param.equals("${user-name}")) {
             userName = param;
         }
-        RequestPojo testRequest = new RequestPojo();
+        Request testRequest = new Request();
         testRequest.setUserName(userName);
         testRequest.setPassword(CustomParameters.PWD);
 
         String pojoToString = PojoHelper.pojoToJson(testRequest);
         String response = RestfullHelper.postToUser(pojoToString).asString();
 
-        String responseUsername = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getUsername();
+        String responseUsername = PojoHelper.jsonToPojoHelper(response, Response.class).getUsername();
 
-        List responseBooksList = PojoHelper.jsonToPojoHelper(response, ResponsePojo.class).getBooks();
+        List responseBooksList = PojoHelper.jsonToPojoHelper(response, Response.class).getBooks();
 
         Assert.assertNotNull(responseUsername, "response Username is null");
         Assert.assertNotNull(responseBooksList, "response Book list is null");
@@ -46,9 +46,9 @@ public class AuthTest {
         Assert.assertFalse(isAuthorized, "User is Authorized!");
 
         String tokenResponse = RestfullHelper.postToGenerateToken(pojoToString).asString();
-        TokenPojo tokenPojo = PojoHelper.jsonToPojoHelper(tokenResponse, TokenPojo.class);
-        Assert.assertEquals(tokenPojo.getStatus(), "Success", "Statuses dont match!");
-        Assert.assertEquals(tokenPojo.getResult(), "User authorized successfully.", "Results do not match!");
+        Token token = PojoHelper.jsonToPojoHelper(tokenResponse, Token.class);
+        Assert.assertEquals(token.getStatus(), "Success", "Statuses dont match!");
+        Assert.assertEquals(token.getResult(), "User authorized successfully.", "Results do not match!");
 
         isAuthorized = Boolean.parseBoolean(RestfullHelper.postToAuthorized(pojoToString).asString());
         Assert.assertTrue(isAuthorized, "User is not authorized!");
