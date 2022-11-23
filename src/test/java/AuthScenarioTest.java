@@ -6,7 +6,6 @@ import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 import pojos.Request;
 import pojos.Response;
 import pojos.Token;
