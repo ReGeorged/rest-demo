@@ -8,12 +8,12 @@ import org.testng.asserts.SoftAssert;
 import pojos.Request;
 import pojos.Response;
 
-public class UserTest {
+public class AuthCasesTest {
 
 
     @Step("Using username:( {0} ) -- and password ( {1} ); response code should be ( {2} ) -- and message should be ( {3} );")
     @Description("Checking different user cases")
-    @Test(dataProvider = "userCasesFromJson", dataProviderClass = DataProvider.class)
+    @Test(dataProvider = "requestAndResponseDataProvider", dataProviderClass = DataProvider.class)
     public void scenario1(String userName, String password, String code, String message) {
         SoftAssert softAssert = new SoftAssert();
         Request testRequest = new Request();

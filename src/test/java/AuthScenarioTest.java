@@ -13,7 +13,7 @@ import pojos.Token;
 
 import java.util.List;
 
-public class AuthTest {
+public class AuthScenarioTest {
 
     @Description("executing scenario two: checking user creation and validation....")
     @Parameters({"user-name"})

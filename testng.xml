@@ -4,8 +4,8 @@
     <parameter name="user-name" value="${user-name}"></parameter>
     <test name="Two test cases from task">
         <classes>
-            <class name="UserTest"></class>
-            <class name="AuthTest"></class>
+            <class name="AuthCasesTest"></class>
+            <class name="AuthScenarioTest"></class>
         </classes>
 
     </test>

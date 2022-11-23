@@ -1,6 +1,6 @@
 package helpers;
 
-import pojos.BooksApi;
+import pojos.RequestAndResponse;
 import utils.FileUtils;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 public class DataProvider {
 
     @org.testng.annotations.DataProvider(name = "userCasesFromJson")
-    public static Object[][] getUserParamsFromJson() {
+    public static Object[][] requestAndResponseDataProvider() {
         String jsonString = FileUtils.convertFileIntoString("src/test/resources/testData.json");
-        List<BooksApi> testDataList = PojoHelper.fromJsonToPojoList(jsonString, BooksApi.class);
+        List<RequestAndResponse> testDataList = PojoHelper.fromJsonToPojoList(jsonString, RequestAndResponse.class);
         /*
         testData ლისტს აქვს N -რაოდენობის ელემენტები(ამ შემთხვევაში მოგვაქვს ჯეისონიდან - ყველაფერი დაყვანილია პოჯოზე)
         თითოეული ელემენტი არის bookApi კლასის ტიპის რომლებსაც თავად აქვთ ორი ატრიბუტი request და response
