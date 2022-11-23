@@ -31,7 +31,7 @@ public class AuthScenarioTest {
         testRequest.setPassword(CustomParameters.PWD);
 
         String pojoToString = PojoHelper.pojoToJson(testRequest);
-        String response = RestfullHelper.postToUser(pojoToString).asString();
+        String response = RestfullHelper.sendPostToUser(pojoToString).asString();
 
         String responseUsername = PojoHelper.jsonToPojoHelper(response, Response.class).getUsername();
 
@@ -42,15 +42,15 @@ public class AuthScenarioTest {
         Assert.assertEquals(responseUsername, testRequest.getUserName(), "UserNames do not match!");
         Assert.assertTrue(responseBooksList.isEmpty(), "List is not null!");
 
-        boolean isAuthorized = Boolean.parseBoolean(RestfullHelper.postToAuthorized(pojoToString).asString());
+        boolean isAuthorized = Boolean.parseBoolean(RestfullHelper.sendPostToAuthorize(pojoToString).asString());
         Assert.assertFalse(isAuthorized, "User is Authorized!");
 
-        String tokenResponse = RestfullHelper.postToGenerateToken(pojoToString).asString();
+        String tokenResponse = RestfullHelper.sendPostToGenerateToken(pojoToString).asString();
         Token token = PojoHelper.jsonToPojoHelper(tokenResponse, Token.class);
         Assert.assertEquals(token.getStatus(), "Success", "Statuses dont match!");
         Assert.assertEquals(token.getResult(), "User authorized successfully.", "Results do not match!");
 
-        isAuthorized = Boolean.parseBoolean(RestfullHelper.postToAuthorized(pojoToString).asString());
+        isAuthorized = Boolean.parseBoolean(RestfullHelper.sendPostToAuthorize(pojoToString).asString());
         Assert.assertTrue(isAuthorized, "User is not authorized!");
     }
 }

@@ -21,7 +21,7 @@ public class AuthCasesTest {
         testRequest.setUserName(userName);
         testRequest.setPassword(password);
 
-        String response = RestfullHelper.postToUser(PojoHelper.pojoToJson(testRequest)).asString();
+        String response = RestfullHelper.sendPostToUser(PojoHelper.pojoToJson(testRequest)).asString();
         String responseCode = PojoHelper.jsonToPojoHelper(response, Response.class).getCode();
         String responseMessage = PojoHelper.jsonToPojoHelper(response, Response.class).getMessage();
         softAssert.assertEquals(responseCode, code, "Response Codes dont match");

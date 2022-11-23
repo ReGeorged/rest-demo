@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public class RestfullHelper {
 
-    private static Response postWithHeadersAndBody(Map headersHashMap, String body, String endPoint) {
+    private static Response sendPostWithHeadersAndBody(Map headersHashMap, String body, String endPoint) {
         Response res = given()
                 .headers(headersHashMap)
                 .body(body)
@@ -21,15 +21,15 @@ public class RestfullHelper {
         return res;
     }
 
-    public static Response postToUser(String userJsonBody) {
-        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.API_ENDPOINT);
+    public static Response sendPostToUser(String jsonBody) {
+        return sendPostWithHeadersAndBody(BookHashMaps.headersForBookStore(), jsonBody, EndPoints.API_ENDPOINT);
     }
 
-    public static Response postToAuthorized(String userJsonBody) {
-        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.AUTHORIZED_ENDPOINT);
+    public static Response sendPostToAuthorize(String jsonBody) {
+        return sendPostWithHeadersAndBody(BookHashMaps.headersForBookStore(), jsonBody, EndPoints.AUTHORIZED_ENDPOINT);
     }
 
-    public static Response postToGenerateToken(String userJsonBody) {
-        return postWithHeadersAndBody(BookHashMaps.headersForBooks(), userJsonBody, EndPoints.GENERATE_TOKEN_ENDPOINT);
+    public static Response sendPostToGenerateToken(String jsonBody) {
+        return sendPostWithHeadersAndBody(BookHashMaps.headersForBookStore(), jsonBody, EndPoints.GENERATE_TOKEN_ENDPOINT);
     }
 }
