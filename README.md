@@ -8,7 +8,7 @@
 #### იუზერნეიმის პარამეტრის გადასაცემად (მაგალითად):
     mvn clean test -D user-name=customNa23qq2
 
-<em>in case of no parameters default value is generated fromdefaultTestData.json</em>
+<em>in case of no parameters default value is generated from defaultTestData.json</em>
 
     
 
@@ -22,6 +22,3 @@
 
 #### სისტემაზე ელურის არსებობის შემთხვევაში ელიურის ყველა რეპორტის აწევა:
     allure serve allure-results
-
-
-<em>რეპოზიტორიაში არსებობს მეორე ბრენჩი, surefire & allure dependencie-ების გარეშე</em>
