@@ -13,12 +13,12 @@
     
 
 #### პირველი ქეისის გასაშვებად:
-    mvn clean test -Dtest=UserTest
+    mvn clean test -Dtest=AuthCasesTest
 
 #### მეორე  ქეისის გასაშვებად:
-     mvn clean test -Dtest=AuthTest
+     mvn clean test -Dtest=AuthScenarioTest
 #### პარამეტრის გადაცემა მეორე ქეისისათვის:
-     mvn clean test -D user-name=custom -Dtest=AuthTest
+     mvn clean test -D user-name=custom -Dtest=AuthScenarioTest
 
 #### სისტემაზე ელურის არსებობის შემთხვევაში ელიურის ყველა რეპორტის აწევა:
     allure serve allure-results
