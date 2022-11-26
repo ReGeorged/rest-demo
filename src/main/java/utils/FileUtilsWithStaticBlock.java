@@ -15,7 +15,7 @@ public class FileUtilsWithStaticBlock {
 
 
     static {
-        HashMap<String, Map> map = new HashMap<>();
+        HashMap<String, Map> mapOfFilesAndJsons = new HashMap<>();
         File testResourcesDir = new File("src/test/resources");
         File mainResourcesDir = new File("src/main/resources");
         File[] testContents = testResourcesDir.listFiles();
@@ -30,9 +30,9 @@ public class FileUtilsWithStaticBlock {
                 String path = file.getAbsolutePath();
                 File fileObj = new File(path);
                 try {
-                    Map<Object, Object> data = mapper.readValue(fileObj, new TypeReference<>() {
+                    Map<Object, Object> jsonDataMap = mapper.readValue(fileObj, new TypeReference<>() {
                     });
-                    map.put(file.getName(), data);
+                    mapOfFilesAndJsons.put(file.getName(), jsonDataMap);
 
                 } catch (MismatchedInputException ignored) {
 
@@ -44,7 +44,7 @@ public class FileUtilsWithStaticBlock {
             }
 
         }
-        instanceStaticMap = map;
+        instanceStaticMap = mapOfFilesAndJsons;
 
     }
 
@@ -55,11 +55,11 @@ public class FileUtilsWithStaticBlock {
 
     }
 
-    public static String getResourcesJsonValue(String key1, String key2) {
+    public static String getResourcesJsonValue(String jsonFileNameInResources, String key) {
         Map<String, Map> allMapsFromStaticBlock = instanceStaticMap;
 
-        Map newMap = allMapsFromStaticBlock.get(key1);
-        return (String) newMap.get(key2);
+        Map newMap = allMapsFromStaticBlock.get(jsonFileNameInResources);
+        return (String) newMap.get(key);
 
     }
 }
