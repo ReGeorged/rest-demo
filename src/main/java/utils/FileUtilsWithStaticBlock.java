@@ -9,11 +9,6 @@ import java.io.File;
 import java.util.*;
 
 public class FileUtilsWithStaticBlock {
-
-
-    private static Map<String, Map> instanceStaticMap;
-
-
     static {
         HashMap<String, Map> mapOfFilesAndJsons = new HashMap<>();
         File testResourcesDir = new File("src/test/resources");
@@ -24,8 +19,6 @@ public class FileUtilsWithStaticBlock {
 
         for (File file : bigArray) {
             if (file.getName().endsWith(".json")) {
-
-
                 ObjectMapper mapper = new ObjectMapper();
                 String path = file.getAbsolutePath();
                 File fileObj = new File(path);
@@ -39,27 +32,17 @@ public class FileUtilsWithStaticBlock {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-
             }
-
         }
         instanceStaticMap = mapOfFilesAndJsons;
 
     }
 
-    public static void main(String[] args) {
+    private static Map<String, Map> instanceStaticMap;
 
-        System.out.println(getResourcesJsonValue("configData.json", "generateToken"));
-
-
-    }
-
-    public static String getResourcesJsonValue(String jsonFileNameInResources, String key) {
+    public static String readJsonAsStringFromResources(String jsonFileNameInResources, String key) {
         Map<String, Map> allMapsFromStaticBlock = instanceStaticMap;
-
         Map newMap = allMapsFromStaticBlock.get(jsonFileNameInResources);
         return (String) newMap.get(key);
-
     }
 }
