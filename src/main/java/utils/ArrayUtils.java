@@ -13,7 +13,6 @@ public class ArrayUtils {
         Collections.addAll(resultList, array2);
 
         @SuppressWarnings("unchecked")
-        //the type cast is safe as the array1 has the type T[]
         T[] resultArray = (T[]) Array.newInstance(array1.getClass().getComponentType(), 0);
         return resultList.toArray(resultArray);
     }
