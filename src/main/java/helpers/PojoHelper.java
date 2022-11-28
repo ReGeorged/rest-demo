@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PojoHelper {
 
-    public static <T> T jsonToPojoHelper(String whatToRead, Class<T> whatClass) {
+    public static <T > T jsonToPojoHelper(String whatToRead, Class<T> whatClass) {
         try {
             T pojo = new ObjectMapper()
                     .readerFor(whatClass)
