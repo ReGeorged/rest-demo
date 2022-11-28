@@ -11,4 +11,5 @@ public class Response {
     private String userID;
     private String username;
     private List books;
+    private int httpStatusCode;
 }

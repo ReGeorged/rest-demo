@@ -18,12 +18,13 @@ public class DataProvider {
         პირველი განზომილება დამოკიდებულია თუ ჯეისონიდან რამდენი BookApi კლასის ელემენტი დაიპარსება
         ჯეისონ ფაილიდან ყველა ელემენტი ემატება testDataLists - შესაბამისად პირველი განზომილება დინამიურია
         */
-        Object[][] testScenariosArray = new Object[testDataList.size()][4];
+        Object[][] testScenariosArray = new Object[testDataList.size()][5];
         for (int i = 0; i < testDataList.size(); i++) {
             testScenariosArray[i][0] = testDataList.get(i).getRequest().getUserName();
             testScenariosArray[i][1] = testDataList.get(i).getRequest().getPassword();
             testScenariosArray[i][2] = testDataList.get(i).getResponse().getCode();
             testScenariosArray[i][3] = testDataList.get(i).getResponse().getMessage();
+            testScenariosArray[i][4] = testDataList.get(i).getResponse().getHttpStatusCode();
         }
         return testScenariosArray;
     }
